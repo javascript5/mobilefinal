@@ -86,8 +86,8 @@ public class FileHelper {
             if (!file.exists()) {
                 file.createNewFile();
             }
-            FileOutputStream fileOutputStream = new FileOutputStream(file,true);
-            fileOutputStream.write((data + System.getProperty("line.separator")).getBytes());
+            FileOutputStream fileOutputStream = new FileOutputStream(file,false);
+            fileOutputStream.write(data.getBytes());
 
             return true;
         }  catch(FileNotFoundException ex) {
