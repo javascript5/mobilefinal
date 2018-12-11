@@ -16,6 +16,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import a59070108.kmitl.ac.th.mobilefinal.FriendModel;
 import a59070108.kmitl.ac.th.mobilefinal.R;
@@ -24,7 +25,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class FriendFragment extends Fragment {
-    private FriendModel friendModel;
+    private ArrayList<FriendModel> friendModelArrayList = new ArrayList<>();
     private ListView listView;
     private FriendAdapter friendAdapter;
     @Override
@@ -42,13 +43,14 @@ public class FriendFragment extends Fragment {
                 try {
                     Response response = client.newCall(request).execute();
                     JSONArray array = new JSONArray(response.body().string());
-                    post.clear();
+                    friendModelArrayList.clear();
                     for (int i = 0; i < array.length(); i++) {
                         JSONObject object = array.getJSONObject(i);
-                        post.add(new Post(object.getInt("userId"),
-                                object.getInt("id"),
-                                object.getString("title"),
-                                object.getString("body")
+                        friendModelArrayList.add(new FriendModel(object.getInt("id"),
+                                object.getString("name"),
+                                object.getString("username"),
+                                object.getString("email"),
+                                object.getString("address")
                         ));
                     }
 
@@ -66,10 +68,10 @@ public class FriendFragment extends Fragment {
             @Override
             protected void onPostExecute(Object o) {
                 if(getActivity() != null) {
-                    postAdapter = new FriendAdapter(
-                            getActivity(),
-                            R.layout.adapter_post,
-                            post
+                    friendAdapter = new FriendAdapter(
+                            getContext(),
+                            R.layout.adapter_friend,
+                            friendModelArrayList
                     );
                 }
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -78,8 +80,8 @@ public class FriendFragment extends Fragment {
 
                     }
                 });
-                postAdapter.notifyDataSetChanged();
-                postListView.setAdapter(postAdapter);
+                friendAdapter.notifyDataSetChanged();
+                listView.setAdapter(friendAdapter);
 
             }
 
