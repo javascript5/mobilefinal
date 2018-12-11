@@ -1,5 +1,6 @@
 package a59070108.kmitl.ac.th.mobilefinal.Login;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 
 import a59070108.kmitl.ac.th.mobilefinal.DBHelper;
+import a59070108.kmitl.ac.th.mobilefinal.Home.HomeFragment;
 import a59070108.kmitl.ac.th.mobilefinal.R;
 import a59070108.kmitl.ac.th.mobilefinal.Rgister.RegisterFragment;
 import a59070108.kmitl.ac.th.mobilefinal.User;
@@ -39,6 +41,15 @@ public class LoginFragment extends Fragment {
             }
         });
         final DBHelper dbHelper = new DBHelper(getContext());
+
+        //Check Loged IN ?
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("59070108", getActivity().MODE_PRIVATE);
+        String userId = sharedPreferences.getString("userid", "null");
+        if(!userId.equals("null")) {
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new HomeFragment()).addToBackStack(null).commit();
+        }
+
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -49,13 +60,19 @@ public class LoginFragment extends Fragment {
                         ) {
                     if (passwordEditText.getText().toString().equals(user.getPassword())) {
                         Toast.makeText(getContext(),"Login สำเร็จ",Toast.LENGTH_SHORT).show();
+                        //When Logedin add user id to shared preference
+                        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("59070108", getActivity().MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("userid", userIdEditText.getText().toString()).apply();
+                        editor.commit();
+                        //Next Page
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new HomeFragment()).addToBackStack(null).commit();
                     }else{
                         Toast.makeText(getContext(),"User Id หรือ Password ไม่ถูกต้อง",Toast.LENGTH_SHORT).show();
                     }
                 }else{
                     Toast.makeText(getContext(),"กรุณากรอกข้อมูลให้ครบถ้วน",Toast.LENGTH_SHORT).show();
                 }
-//                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new LoginFragment()).addToBackStack(null).commit();
             }
         });
     }

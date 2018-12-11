@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import a59070108.kmitl.ac.th.mobilefinal.User;
+
 public class FileHelper {
     final static String fileName = "data.txt";
     final static String path = Environment.getExternalStorageDirectory().getPath() + "/readwrite/" ;
@@ -24,11 +26,10 @@ public class FileHelper {
     public FileHelper(Context context){
         this.context = context;
     }
-    public static ArrayList<String[]> ReadFile(String fileName){
+    public static String ReadFile(String userId){
         String line = null;
-        ArrayList<String[]> arrayList = new ArrayList<>();
         try {
-            FileInputStream fileInputStream = new FileInputStream (new File(path + fileName));
+            FileInputStream fileInputStream = new FileInputStream (new File(path +"/"+userId+"/"+ userId+".txt"));
             InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
             StringBuilder stringBuilder = new StringBuilder();
@@ -36,8 +37,6 @@ public class FileHelper {
             while ( (line = bufferedReader.readLine()) != null )
             {
                 stringBuilder.append(line + System.getProperty("line.separator"));
-                String[] values = line.split(",");
-                arrayList.add(values);
             }
 
 //            Print Data ----------------------------
@@ -59,17 +58,17 @@ public class FileHelper {
         catch(IOException ex) {
             Log.d(TAG, ex.getMessage());
         }
-        return arrayList;
+        return line;
     }
 
-    public static void generateNote(String fileName) {
+    public static void generateNote(String userId) {
         Log.i("RegisterFragment", path);
         try {
-            File root = new File(path+ fileName);
+            File root = new File(path+userId);
             if (!root.exists()) {
                 root.mkdirs();
             }
-            File gpxfile = new File(root, fileName);
+            File gpxfile = new File(root, userId+".txt");
             FileWriter writer = new FileWriter(gpxfile);
             writer.append("");
             writer.flush();
@@ -83,7 +82,7 @@ public class FileHelper {
     public static boolean saveToFile(String fileName, String data){
         try {
             new File(path).mkdir();
-            File file = new File(path+"/"+fileName+"/"+ fileName);
+            File file = new File(path+"/"+fileName+"/"+ fileName+".txt");
             if (!file.exists()) {
                 file.createNewFile();
             }

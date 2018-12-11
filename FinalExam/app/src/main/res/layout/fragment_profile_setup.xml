@@ -6,66 +6,77 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/welcome_text_home_fragment"
-        android:textSize="30dp"
-        android:layout_width="match_parent"
+    <EditText
+        android:id="@+id/user_id_profile_setup_fragment"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:text="Hello Firstname LastName"
+        android:hint="User Id"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/description_text_home_fragment"
-        android:textSize="15dp"
-        android:layout_width="match_parent"
+    <EditText
+        android:id="@+id/name_profile_setup_fragment"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="20dp"
+        android:hint="Name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_id_profile_setup_fragment" />
+
+    <EditText
+        android:id="@+id/age_profile_setup_fragment"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:text="My Description"
+        android:hint="Age"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcome_text_home_fragment" />
+        app:layout_constraintTop_toBottomOf="@+id/password_profile_setup_fragment" />
 
-    <Button
-        android:id="@+id/profile_setup_button_home_fragment"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="20dp"
-        android:text="Profile Setup"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/description_text_home_fragment" />
-
-    <Button
-        android:id="@+id/my_friend_button_home_fragment"
+    <EditText
+        android:id="@+id/password_profile_setup_fragment"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:text="My Friends"
+        android:hint="password"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_setup_button_home_fragment" />
+        app:layout_constraintTop_toBottomOf="@+id/name_profile_setup_fragment" />
+
+    <EditText
+        android:id="@+id/quote_profile_setup_fragment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:hint="quote"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/age_profile_setup_fragment" />
 
     <Button
-        android:id="@+id/sign_out_button_home_fragment"
+        android:id="@+id/save_button_profile_setup_fragment"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:text="Sign Out"
+        android:text="Save"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/my_friend_button_home_fragment" />
+        app:layout_constraintTop_toBottomOf="@+id/quote_profile_setup_fragment" />
 
 </android.support.constraint.ConstraintLayout>

@@ -40,7 +40,6 @@ public class DBHelper extends SQLiteOpenHelper {
             sqLiteDatabase = this.getWritableDatabase();
             ContentValues values = new ContentValues();
             values.put("name", user.getName());
-
             values.put("password", user.getPassword());
             values.put("userid", user.getUserId());
             values.put("age", user.getAge());
@@ -57,22 +56,22 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
 
-//    public void updateTime() {
-//        try{
-//            sqLiteDatabase = this.getWritableDatabase();
-//            ContentValues values = new ContentValues();
-//            values.put("date", sleepStore.getDate());
-//            values.put("time1", sleepStore.getSleepTime());
-//            values.put("time2", sleepStore.getWakeUpTime());
-//            values.put("differenceTime", sleepStore.getDifferenceTime());
-//            sqLiteDatabase.update("table_name", values, "date=" + "'" + sleepStore.getDate() + "'", null);
-//            Toast.makeText(context,"บันทึกข้อมูลสำเร็จ", Toast.LENGTH_SHORT).show();
-//            sqLiteDatabase.close();
-//        }catch (SQLiteConstraintException e){
-//            Log.i("Time", e.getMessage());
-//            Toast.makeText(context,"บันทึกข้อมูลไม่สำเร็จ", Toast.LENGTH_SHORT).show();
-//        }
-//    }
+    public void updateTime(User user) {
+        try{
+            sqLiteDatabase = this.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put("name", user.getName());
+            values.put("password", user.getPassword());
+            values.put("userid", user.getUserId());
+            values.put("age", user.getAge());
+            sqLiteDatabase.update("user", values, "userid=" + "'" + user.getUserId() + "'", null);
+            Toast.makeText(context,"บันทึกข้อมูลสำเร็จ", Toast.LENGTH_SHORT).show();
+            sqLiteDatabase.close();
+        }catch (SQLiteConstraintException e){
+            Log.i("Time", e.getMessage());
+            Toast.makeText(context,"บันทึกข้อมูลไม่สำเร็จ", Toast.LENGTH_SHORT).show();
+        }
+    }
 
 
 
