@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import a59070108.kmitl.ac.th.mobilefinal.DBHelper;
+import a59070108.kmitl.ac.th.mobilefinal.Friend.FriendFragment;
 import a59070108.kmitl.ac.th.mobilefinal.Login.LoginFragment;
 import a59070108.kmitl.ac.th.mobilefinal.Profile.ProfileSetupFragment;
 import a59070108.kmitl.ac.th.mobilefinal.R;
@@ -18,13 +19,14 @@ import a59070108.kmitl.ac.th.mobilefinal.TextFile.FileHelper;
 import a59070108.kmitl.ac.th.mobilefinal.User;
 
 public class HomeFragment extends Fragment {
-    private  TextView welcomeText , descriptionText, homeButton;
+    private  TextView welcomeText , descriptionText, homeButton, friendButton;
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
          welcomeText = getView().findViewById(R.id.welcome_text_home_fragment);
          descriptionText = getView().findViewById(R.id.description_text_home_fragment);
         homeButton = getView().findViewById(R.id.profile_setup_button_home_fragment);
+        friendButton = getView().findViewById(R.id.my_friend_button_home_fragment);
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("59070108", getActivity().MODE_PRIVATE);
         String userId = sharedPreferences.getString("userid", "null");
         if(!userId.equals("null")){
@@ -39,6 +41,13 @@ public class HomeFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new ProfileSetupFragment()).addToBackStack(null).commit();
+                }
+            });
+
+            friendButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new FriendFragment()).addToBackStack(null).commit();
                 }
             });
         }else{
